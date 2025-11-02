@@ -6,8 +6,8 @@ package com.github.dart_lang.jnigen.apisummarizer.elements;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import kotlinx.metadata.KmProperty;
-import kotlinx.metadata.jvm.JvmExtensionsKt;
+import kotlin.metadata.KmProperty;
+import kotlin.metadata.jvm.JvmExtensionsKt;
 
 public class KotlinProperty {
   public String fieldName;
@@ -50,18 +50,16 @@ public class KotlinProperty {
     prop.kotlinName = p.getName();
     prop.returnType = KotlinType.fromKmType(p.getReturnType());
     prop.receiverParameterType = KotlinType.fromKmType(p.getReceiverParameterType());
-    prop.contextReceiverTypes =
-        p.getContextReceiverTypes().stream()
-            .map(KotlinType::fromKmType)
-            .collect(Collectors.toList());
+    prop.contextReceiverTypes = p.getContextReceiverTypes().stream()
+        .map(KotlinType::fromKmType)
+        .collect(Collectors.toList());
     prop.jvmFlags = JvmExtensionsKt.getJvmFlags(p);
     prop.flags = p.getFlags();
     prop.setterFlags = p.getSetterFlags();
     prop.getterFlags = p.getGetterFlags();
-    prop.typeParameters =
-        p.getTypeParameters().stream()
-            .map(KotlinTypeParameter::fromKmTypeParameter)
-            .collect(Collectors.toList());
+    prop.typeParameters = p.getTypeParameters().stream()
+        .map(KotlinTypeParameter::fromKmTypeParameter)
+        .collect(Collectors.toList());
     prop.setterParameter = KotlinValueParameter.fromKmValueParameter(p.getSetterParameter());
     return prop;
   }

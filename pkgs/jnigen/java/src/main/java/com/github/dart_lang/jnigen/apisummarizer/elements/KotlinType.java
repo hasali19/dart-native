@@ -6,9 +6,9 @@ package com.github.dart_lang.jnigen.apisummarizer.elements;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import kotlinx.metadata.Flag;
-import kotlinx.metadata.KmClassifier;
-import kotlinx.metadata.KmType;
+import kotlin.metadata.Flag;
+import kotlin.metadata.KmClassifier;
+import kotlin.metadata.KmType;
 
 public class KotlinType {
   public int flags;
@@ -19,7 +19,8 @@ public class KotlinType {
   public boolean isNullable;
 
   public static KotlinType fromKmType(KmType t) {
-    if (t == null) return null;
+    if (t == null)
+      return null;
     var type = new KotlinType();
     type.flags = t.getFlags();
     // Processing the information needed from the flags.
@@ -35,10 +36,9 @@ public class KotlinType {
       type.kind = "typeParameter";
       type.id = ((KmClassifier.TypeParameter) classifier).getId();
     }
-    type.arguments =
-        t.getArguments().stream()
-            .map(KotlinTypeProjection::fromKmTypeProjection)
-            .collect(Collectors.toList());
+    type.arguments = t.getArguments().stream()
+        .map(KotlinTypeProjection::fromKmTypeProjection)
+        .collect(Collectors.toList());
     return type;
   }
 }

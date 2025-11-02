@@ -9,8 +9,8 @@ import com.github.dart_lang.jnigen.apisummarizer.elements.KotlinClass;
 import com.github.dart_lang.jnigen.apisummarizer.elements.KotlinPackage;
 import java.util.ArrayList;
 import java.util.List;
-import kotlinx.metadata.jvm.KotlinClassHeader;
-import kotlinx.metadata.jvm.KotlinClassMetadata;
+import kotlin.metadata.jvm.KotlinClassHeader;
+import kotlin.metadata.jvm.KotlinClassMetadata;
 import org.objectweb.asm.AnnotationVisitor;
 
 /**
@@ -78,22 +78,19 @@ public class KotlinMetadataAnnotationVisitor extends AnnotationVisitor {
 
   @Override
   public void visitEnd() {
-    var header =
-        new KotlinClassHeader(
-            kind,
-            metadataVersion,
-            data1.toArray(String[]::new),
-            data2.toArray(String[]::new),
-            extraString,
-            packageName,
-            extraInt);
+    var header = new KotlinClassHeader(
+        kind,
+        metadataVersion,
+        data1.toArray(String[]::new),
+        data2.toArray(String[]::new),
+        extraString,
+        packageName,
+        extraInt);
     var metadata = KotlinClassMetadata.read(header);
     if (metadata instanceof KotlinClassMetadata.Class) {
-      decl.kotlinClass =
-          KotlinClass.fromKmClass(((KotlinClassMetadata.Class) metadata).toKmClass());
+      decl.kotlinClass = KotlinClass.fromKmClass(((KotlinClassMetadata.Class) metadata).toKmClass());
     } else if (metadata instanceof KotlinClassMetadata.FileFacade) {
-      decl.kotlinPackage =
-          KotlinPackage.fromKmPackage(((KotlinClassMetadata.FileFacade) metadata).toKmPackage());
+      decl.kotlinPackage = KotlinPackage.fromKmPackage(((KotlinClassMetadata.FileFacade) metadata).toKmPackage());
     } else if (metadata instanceof KotlinClassMetadata.SyntheticClass) {
       // Ignore synthetic classes such as lambdas.
     } else if (metadata instanceof KotlinClassMetadata.MultiFileClassFacade) {

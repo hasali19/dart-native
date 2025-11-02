@@ -6,9 +6,9 @@ package com.github.dart_lang.jnigen.apisummarizer.elements;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import kotlinx.metadata.Flag;
-import kotlinx.metadata.KmFunction;
-import kotlinx.metadata.jvm.JvmExtensionsKt;
+import kotlin.metadata.Flag;
+import kotlin.metadata.KmFunction;
+import kotlin.metadata.jvm.JvmExtensionsKt;
 
 public class KotlinFunction {
   /** Name in the byte code. */
@@ -42,20 +42,17 @@ public class KotlinFunction {
     // Processing the information needed from the flags.
     fun.isSuspend = Flag.Function.IS_SUSPEND.invoke(fun.flags);
     fun.isOperator = Flag.Function.IS_OPERATOR.invoke(fun.flags);
-    fun.valueParameters =
-        f.getValueParameters().stream()
-            .map(KotlinValueParameter::fromKmValueParameter)
-            .collect(Collectors.toList());
+    fun.valueParameters = f.getValueParameters().stream()
+        .map(KotlinValueParameter::fromKmValueParameter)
+        .collect(Collectors.toList());
     fun.returnType = KotlinType.fromKmType(f.getReturnType());
     fun.receiverParameterType = KotlinType.fromKmType(f.getReceiverParameterType());
-    fun.contextReceiverTypes =
-        f.getContextReceiverTypes().stream()
-            .map(KotlinType::fromKmType)
-            .collect(Collectors.toList());
-    fun.typeParameters =
-        f.getTypeParameters().stream()
-            .map(KotlinTypeParameter::fromKmTypeParameter)
-            .collect(Collectors.toList());
+    fun.contextReceiverTypes = f.getContextReceiverTypes().stream()
+        .map(KotlinType::fromKmType)
+        .collect(Collectors.toList());
+    fun.typeParameters = f.getTypeParameters().stream()
+        .map(KotlinTypeParameter::fromKmTypeParameter)
+        .collect(Collectors.toList());
     fun.isPublic = Flag.IS_PUBLIC.invoke(fun.flags);
     fun.isPrivate = Flag.IS_PRIVATE.invoke(fun.flags);
     fun.isProtected = Flag.IS_PROTECTED.invoke(fun.flags);
