@@ -2,6 +2,7 @@ plugins {
     java
     application
     id("io.ktor.plugin") version "3.0.3"
+    kotlin("jvm") version "2.2.0"
 }
 
 repositories {
@@ -24,8 +25,6 @@ group = "com.github.dart_lang.jnigen"
 description = "ApiSummarizer"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
 }
 application {
     mainClass.set("com.github.dart_lang.jnigen.apisummarizer.Main")

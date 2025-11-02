@@ -24,8 +24,6 @@ public class KotlinClass {
     public String companionObject;
     public String inlineClassUnderlyingPropertyName;
     public KotlinType inlineClassUnderlyingType;
-    public int flags;
-    public int jvmFlags;
 
     public static KotlinClass fromKmClass(KmClass c) {
         var klass = new KotlinClass();
@@ -44,8 +42,6 @@ public class KotlinClass {
                 .collect(Collectors.toList());
         klass.superTypes = c.getSupertypes().stream().map(KotlinType::fromKmType).collect(Collectors.toList());
         klass.enumEntries = c.getEnumEntries();
-        klass.flags = c.getFlags();
-        klass.jvmFlags = JvmExtensionsKt.getJvmFlags(c);
         klass.nestedClasses = c.getNestedClasses();
         klass.companionObject = c.getCompanionObject();
         klass.inlineClassUnderlyingPropertyName = c.getInlineClassUnderlyingPropertyName();

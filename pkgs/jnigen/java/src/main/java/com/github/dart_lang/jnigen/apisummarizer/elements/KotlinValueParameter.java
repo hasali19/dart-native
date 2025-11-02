@@ -8,7 +8,6 @@ import kotlin.metadata.KmValueParameter;
 
 public class KotlinValueParameter {
   public String name;
-  public int flags;
   public KotlinType type;
   public KotlinType varargElementType;
 
@@ -17,7 +16,6 @@ public class KotlinValueParameter {
       return null;
     var param = new KotlinValueParameter();
     param.name = p.getName();
-    param.flags = p.getFlags();
     param.type = KotlinType.fromKmType(p.getType());
     param.varargElementType = KotlinType.fromKmType(p.getVarargElementType());
     return param;

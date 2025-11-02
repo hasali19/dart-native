@@ -86,11 +86,11 @@ public class KotlinMetadataAnnotationVisitor extends AnnotationVisitor {
         extraString,
         packageName,
         extraInt);
-    var metadata = KotlinClassMetadata.read(header);
+    var metadata = KotlinClassMetadata.readLenient(header);
     if (metadata instanceof KotlinClassMetadata.Class) {
-      decl.kotlinClass = KotlinClass.fromKmClass(((KotlinClassMetadata.Class) metadata).toKmClass());
+      decl.kotlinClass = KotlinClass.fromKmClass(((KotlinClassMetadata.Class) metadata).getKmClass());
     } else if (metadata instanceof KotlinClassMetadata.FileFacade) {
-      decl.kotlinPackage = KotlinPackage.fromKmPackage(((KotlinClassMetadata.FileFacade) metadata).toKmPackage());
+      decl.kotlinPackage = KotlinPackage.fromKmPackage(((KotlinClassMetadata.FileFacade) metadata).getKmPackage());
     } else if (metadata instanceof KotlinClassMetadata.SyntheticClass) {
       // Ignore synthetic classes such as lambdas.
     } else if (metadata instanceof KotlinClassMetadata.MultiFileClassFacade) {

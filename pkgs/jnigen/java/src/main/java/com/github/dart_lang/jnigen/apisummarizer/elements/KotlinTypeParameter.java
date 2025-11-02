@@ -12,7 +12,6 @@ import kotlin.metadata.KmVariance;
 public class KotlinTypeParameter {
   public String name;
   public int id;
-  public int flags;
   public List<KotlinType> upperBounds;
   public KmVariance variance;
 
@@ -20,7 +19,6 @@ public class KotlinTypeParameter {
     var typeParam = new KotlinTypeParameter();
     typeParam.name = t.getName();
     typeParam.id = t.getId();
-    typeParam.flags = t.getFlags();
     typeParam.upperBounds = t.getUpperBounds().stream().map(KotlinType::fromKmType).collect(Collectors.toList());
     typeParam.variance = t.getVariance();
     return typeParam;
